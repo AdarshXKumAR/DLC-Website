@@ -40,7 +40,6 @@ const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate }) => {
           >
             <div className="relative">
               <motion.div
-                animate={{ rotate: 360 }}
                 transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
                 className="w-10 h-10 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center shadow-lg"
               >

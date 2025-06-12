@@ -23,6 +23,7 @@ const FeedbackSection: React.FC = () => {
   const [hoveredRating, setHoveredRating] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(''); // ✅ added
 
   const API_BASE_URL = 'http://localhost:5000/api';
 
@@ -34,7 +35,9 @@ const FeedbackSection: React.FC = () => {
     { value: 'bug', labelKey: 'feedback.category.bug' },
   ];
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
   };
@@ -69,17 +72,15 @@ const FeedbackSection: React.FC = () => {
         message: '',
       });
 
-      // Reset success message after 3 seconds
-      setTimeout(() => {
-        setIsSubmitted(false);
-      }, 3000);
+      setTimeout(() => setIsSubmitted(false), 3000);
     } catch (error) {
       console.error('Error submitting feedback:', error);
-      alert(
+      setErrorMessage(
         language === 'en'
           ? 'Error submitting feedback. Please try again.'
           : 'फीडबैक सबमिट करने में त्रुटि। कृपया पुनः प्रयास करें।'
       );
+      setTimeout(() => setErrorMessage(''), 5000); // ✅ hide after 5 sec
     } finally {
       setIsSubmitting(false);
     }
@@ -137,7 +138,7 @@ const FeedbackSection: React.FC = () => {
           className="glass dark:glass-dark rounded-2xl shadow-2xl p-8"
         >
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Name Field */}
+            {/* Name */}
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 {t('feedback.name')}
@@ -149,11 +150,11 @@ const FeedbackSection: React.FC = () => {
                 value={form.name}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
+                className="w-full px-4 py-3 bg-white dark:bg-gray-800 text-gray-800 dark:text-white border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
               />
             </div>
 
-            {/* Email Field */}
+            {/* Email */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 {t('feedback.email')}
@@ -165,11 +166,11 @@ const FeedbackSection: React.FC = () => {
                 value={form.email}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
+                className="w-full px-4 py-3 bg-white dark:bg-gray-800 text-gray-800 dark:text-white border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
               />
             </div>
 
-            {/* Category Field */}
+            {/* Category */}
             <div>
               <label htmlFor="category" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 {t('feedback.category')}
@@ -180,7 +181,7 @@ const FeedbackSection: React.FC = () => {
                 value={form.category}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
+                className="w-full px-4 py-3 bg-white dark:bg-gray-800 text-gray-800 dark:text-white border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
               >
                 <option value="">{t('feedback.category.select')}</option>
                 {categories.map((cat) => (
@@ -191,7 +192,7 @@ const FeedbackSection: React.FC = () => {
               </select>
             </div>
 
-            {/* Rating Field */}
+            {/* Rating */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 {t('feedback.rating')}
@@ -220,7 +221,7 @@ const FeedbackSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Message Field */}
+            {/* Message */}
             <div>
               <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 {t('feedback.message')}
@@ -233,11 +234,11 @@ const FeedbackSection: React.FC = () => {
                 required
                 rows={6}
                 placeholder={t('feedback.message.placeholder')}
-                className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300 resize-none"
+                className="w-full px-4 py-3 bg-white dark:bg-gray-800 text-gray-800 dark:text-white border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300 resize-none"
               />
             </div>
 
-            {/* Submit Button */}
+            {/* Submit */}
             <motion.button
               type="submit"
               disabled={isSubmitting}
@@ -261,6 +262,17 @@ const FeedbackSection: React.FC = () => {
                 </>
               )}
             </motion.button>
+
+            {/* Error message box */}
+            {errorMessage && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-4 text-sm text-red-600 dark:text-red-400 bg-red-100 dark:bg-red-900/30 border border-red-200 dark:border-red-700 px-4 py-3 rounded-xl"
+              >
+                {errorMessage}
+              </motion.div>
+            )}
           </form>
         </motion.div>
       </div>

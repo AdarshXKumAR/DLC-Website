@@ -42,7 +42,6 @@ const Footer: React.FC = () => {
             >
               <div className="flex items-center space-x-3 mb-6">
                 <motion.div
-                  animate={{ rotate: 360 }}
                   transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
                   className="w-12 h-12 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center"
                 >
@@ -197,13 +196,10 @@ const Footer: React.FC = () => {
                 {t('footer.copyright')}
               </p>
               <div className="flex items-center space-x-6 mt-4 md:mt-0">
-                <motion.span
-                  animate={{ scale: [1, 1.05, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="text-sm text-primary-400"
-                >
+                <span className="text-sm text-primary-400">
                   Made with ❤️ for Digital Empowerment
-                </motion.span>
+                </span>
+
               </div>
             </div>
           </div>

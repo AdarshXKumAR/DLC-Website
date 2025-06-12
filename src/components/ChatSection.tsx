@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Mic, Paperclip, Trash2, Bot, User } from 'lucide-react';
+import { Send, Mic, Paperclip, Trash2, Sparkles, User } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import LoadingSpinner from './LoadingSpinner';
 
@@ -233,7 +233,7 @@ const ChatSection: React.FC = () => {
                   transition={{ duration: 2, repeat: Infinity }}
                   className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center"
                 >
-                  <Bot className="w-6 h-6 text-white" />
+                  <Sparkles className="w-6 h-6 text-white" />
                 </motion.div>
                 <div>
                   <h3 className="text-white font-semibold">TechBuddy</h3>
@@ -268,7 +268,7 @@ const ChatSection: React.FC = () => {
                     transition={{ duration: 2, repeat: Infinity }}
                     className="w-16 h-16 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center mx-auto mb-4"
                   >
-                    <Bot className="w-8 h-8 text-white" />
+                    <Sparkles className="w-8 h-8 text-white" />
                   </motion.div>
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                     {t('chat.welcome.title')}
@@ -299,7 +299,7 @@ const ChatSection: React.FC = () => {
                       {message.sender === 'user' ? (
                         <User className="w-4 h-4 text-white" />
                       ) : (
-                        <Bot className="w-4 h-4 text-white" />
+                        <Sparkles className="w-4 h-4 text-white" />
                       )}
                     </div>
                     <div className={`max-w-xs lg:max-w-md px-4 py-2 rounded-2xl ${
@@ -320,7 +320,7 @@ const ChatSection: React.FC = () => {
                   className="flex items-start space-x-3"
                 >
                   <div className="w-8 h-8 bg-gradient-to-r from-gray-500 to-gray-600 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Bot className="w-4 h-4 text-white" />
+                    <Sparkles className="w-4 h-4 text-white" />
                   </div>
                   <div className="bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-2xl">
                     <LoadingSpinner />
