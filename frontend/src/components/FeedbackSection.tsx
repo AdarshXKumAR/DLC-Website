@@ -51,7 +51,7 @@ const FeedbackSection: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/feedback`, {
+      const response = await fetch(`https://dlc-website-backend.onrender.com/feedback`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
