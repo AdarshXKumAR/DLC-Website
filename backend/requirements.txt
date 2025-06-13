@@ -6,3 +6,4 @@ SpeechRecognition
 Werkzeug
 PyPDF2
 Pillow
+mediapipe>=0.10.20
