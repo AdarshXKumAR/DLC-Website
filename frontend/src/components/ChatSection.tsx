@@ -78,7 +78,7 @@ const ChatSection: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/chat`, {
+      const response = await fetch(`https://dlc-website-backend.onrender.com/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -151,7 +151,7 @@ const ChatSection: React.FC = () => {
     formData.append('session_id', sessionId);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/upload-file`, {
+      const response = await fetch(`https://dlc-website-backend.onrender.com/upload-file`, {
         method: 'POST',
         body: formData,
       });
