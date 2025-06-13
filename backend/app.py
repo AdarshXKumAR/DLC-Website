@@ -22,7 +22,8 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__, static_folder="../frontend/dist", static_url_path="/")
-CORS(app)  # Enable CORS for all routes
+CORS(app, origins=["https://relaxed-pastelito-d8b94b.netlify.app/"])
+
 
 # Configure Gemini API
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
