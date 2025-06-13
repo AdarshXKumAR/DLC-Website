@@ -15,13 +15,13 @@ from PIL import Image
 import base64
 
 # Load environment variables from .env.local
-load_dotenv('.env.local')
+load_dotenv('backend/.env.local')
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-app = Flask(__name__, static_folder="../project/dist", static_url_path="/")
+app = Flask(__name__, static_folder="../frontend/dist", static_url_path="/")
 CORS(app)  # Enable CORS for all routes
 
 # Configure Gemini API
