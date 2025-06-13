@@ -22,7 +22,7 @@ const ChatSection: React.FC = () => {
   const [recognition, setRecognition] = useState<SpeechRecognition | null>(null);
   const [sessionId] = useState(() => 'session_' + Date.now());
 
-  const API_BASE_URL = 'http://localhost:5000/api';
+  const API_BASE_URL = 'https://dlc-website-backend.onrender.com';
 
   useEffect(() => {
     // Initialize speech recognition
