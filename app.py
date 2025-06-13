@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template_string
+from flask import Flask, request, jsonify, render_template_string, send_from_directory
 from flask_cors import CORS
 import google.generativeai as genai
 import os
@@ -21,7 +21,7 @@ load_dotenv('.env.local')
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="../project/dist", static_url_path="/")
 CORS(app)  # Enable CORS for all routes
 
 # Configure Gemini API
@@ -114,7 +114,7 @@ def get_digital_literacy_context():
 @app.route('/')
 def home():
     """Serve the main HTML page"""
-    return jsonify({"message": "Digital Literacy Hub Backend is running!", "status": "healthy"})
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/api/chat', methods=['POST'])
 def chat():
